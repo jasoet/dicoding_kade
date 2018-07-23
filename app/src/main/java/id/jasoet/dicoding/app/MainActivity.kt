@@ -6,7 +6,6 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.View
-import android.widget.Toast
 import id.jasoet.dicoding.app.adapter.RecyclerViewAdapter
 import id.jasoet.dicoding.app.data.Item
 import org.jetbrains.anko.AnkoComponent
@@ -15,33 +14,33 @@ import org.jetbrains.anko.constraint.layout.constraintLayout
 import org.jetbrains.anko.matchParent
 import org.jetbrains.anko.recyclerview.v7.recyclerView
 import org.jetbrains.anko.setContentView
+import org.jetbrains.anko.startActivity
 
 class MainActivity : AppCompatActivity() {
-    private val items: MutableList<Item> = mutableListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val mainUi = MainActivityUI()
         mainUi.setContentView(this)
 
-        initData()
+        val items = initData()
 
         mainUi.recyclerView.adapter = RecyclerViewAdapter(items) {
-            val toast = Toast.makeText(applicationContext, it.name, Toast.LENGTH_SHORT)
-            toast.show()
+            startActivity<DetailActivity>("item" to it)
         }
     }
 
-    private fun initData() {
+    private fun initData(): List<Item> {
         val name = resources.getStringArray(R.array.club_name)
+        val description = resources.getStringArray(R.array.club_description)
         val image = resources.obtainTypedArray(R.array.club_image)
-        items.clear()
 
-        for (i in name.indices) {
-            items.add(Item(name[i], image.getResourceId(i, 0)))
+        val result = name.mapIndexed { i, itemName ->
+            Item(itemName, image.getResourceId(i, 0), description[i])
         }
 
         image.recycle()
+        return result
     }
 
     class MainActivityUI : AnkoComponent<MainActivity> {

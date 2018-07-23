@@ -11,6 +11,17 @@
         <item>Arsenal FC</item>
     </string-array>
 
+    <string-array name="club_description">
+        <item>Long Description for Barcelona FC</item>
+        <item>Long Description for Real Madrid FC</item>
+        <item>Long Description for Bayern Munchen FC</item>
+        <item>Long Description for Manchester City FC</item>
+        <item>Long Description for Manchester United FC</item>
+        <item>Long Description for Chelsea FC</item>
+        <item>Long Description for AC Milan FC</item>
+        <item>Long Description for Arsenal FC</item>
+    </string-array>
+
     <array name="club_image">
         <item>@drawable/img_barca</item>
         <item>@drawable/img_madrid</item>
